@@ -3,13 +3,9 @@ package model.bo;
 public class Auteur {
 	private Integer id;
 	private String nom;
-	private String prenom;
 	
-	public Auteur(Integer id, String nom, String prenom) {
-		super();
-		this.id = id;
+	public Auteur(String nom) {
 		this.nom = nom;
-		this.prenom = prenom;
 	}
 
 	public Auteur() {
@@ -31,15 +27,5 @@ public class Auteur {
 		this.nom = nom;
 	}
 
-	public String getPrenom() {
-		return prenom;
-	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	
-	
-	
 }
