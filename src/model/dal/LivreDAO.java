@@ -16,7 +16,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 		public Livre selectBy(int id) {
 			Livre l = new Livre();
 			Connection cnx = Connexion.getCnx();
-			String sqlPrepared = "SELECT * FROM livre WHERE id = ?";
+			String sqlPrepared = "SELECT * FROM livre_test WHERE id = ?";
 			try {
 				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared);
 				pStmt.setInt(1, id);
