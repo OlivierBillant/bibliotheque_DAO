@@ -38,7 +38,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 		public List<Livre> selectAll() {
 			List<Livre> stock = new ArrayList<Livre>();
 			Connection cnx = Connexion.getCnx();
-			String sql = "SELECT * from livre_test AS l INNER JOIN auteurs AS a ON a.id = l.auteur_id";
+			String sql = "SELECT l.id AS livre_id, titre, isbn, a.id AS auteur_id, name FROM livre_test AS l INNER JOIN auteurs AS a ON a.id = l.auteur_id";
 			try {
 				Statement state = cnx.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 				ResultSet rs = state.executeQuery(sql);

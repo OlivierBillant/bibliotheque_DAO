@@ -14,6 +14,7 @@ public class Livre {
 		this.isbn = isbn;
 		this.auteur_id = auteur;
 	}
+	
 
 	public Integer getId() {
 		return id;
