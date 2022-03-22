@@ -22,11 +22,13 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared);
 				pStmt.setInt(1, id);
 				ResultSet rs = pStmt.executeQuery();
+				Auteur a = new Auteur(rs.getString("name"));
+
 				rs.next(); // extraire de la pile
 				l.setId(rs.getInt("id"));
 				l.setTitre(rs.getString("titre"));
 				l.setIsbn(rs.getString("isbn"));
-				l.setAuteur_id(rs.getInt("auteur_id"));
+				l.setAuteur_id(a);
 				
 
 			} catch (SQLException e) {
@@ -44,10 +46,11 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 				ResultSet rs = state.executeQuery(sql);
 				while (rs.next()) {
 					Livre l = new Livre();
-					l.setId(rs.getInt("id"));
+					Auteur a = new Auteur(rs.getString("name"));
+					l.setId(rs.getInt("livre_id"));
 					l.setTitre(rs.getString("titre"));
 					l.setIsbn(rs.getString("isbn"));
-					l.setAuteur_id(rs.getClass());
+					l.setAuteur_id(a);
 					stock.add(l);
 					}
 				}
@@ -57,47 +60,47 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 			return stock;
 		}
 
-		public void update(Livre l) {
-			Connection cnx = Connexion.getCnx();
-			String sqlPrepared = "UPDATE livre";
-			sqlPrepared += " SET titre= ?,";
-			sqlPrepared += " isbn=?,";
-			sqlPrepared += " auteur=?";
-			sqlPrepared += " WHERE id=? ";
-			
-			try {
-				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared);
-				pStmt.setString(1, l.getTitre());
-				pStmt.setString(2, l.getIsbn());
-				pStmt.setInt(3, l.getAuteur_id());
-				pStmt.setInt(4, l.getId());
-				
-				pStmt.executeUpdate();
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		public void insert(Livre l) {
-			Connection cnx = Connexion.getCnx();
-			String sqlPrepared = "INSERT INTO livre VALUES (NULL,?,?,?)";
-			try {
-				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared, Statement.RETURN_GENERATED_KEYS);
-	
-				pStmt.setString(1, l.getTitre());
-				pStmt.setString(2, l.getIsbn());
-				pStmt.setInt(3, l.getAuteur_id());
-				pStmt.executeUpdate();
-
-				ResultSet rs = pStmt.getGeneratedKeys();
-				rs.next();
-				l.setId(rs.getInt(1));
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+//		public void update(Livre l) {
+//			Connection cnx = Connexion.getCnx();
+//			String sqlPrepared = "UPDATE livre";
+//			sqlPrepared += " SET titre= ?,";
+//			sqlPrepared += " isbn=?,";
+//			sqlPrepared += " auteur=?";
+//			sqlPrepared += " WHERE id=? ";
+//			
+//			try {
+//				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared);
+//				pStmt.setString(1, l.getTitre());
+//				pStmt.setString(2, l.getIsbn());
+//				pStmt.setInt(3, l.getAuteur_id());
+//				pStmt.setInt(4, l.getId());
+//				
+//				pStmt.executeUpdate();
+//
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		public void insert(Livre l) {
+//			Connection cnx = Connexion.getCnx();
+//			String sqlPrepared = "INSERT INTO livre VALUES (NULL,?,?,?)";
+//			try {
+//				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared, Statement.RETURN_GENERATED_KEYS);
+//	
+//				pStmt.setString(1, l.getTitre());
+//				pStmt.setString(2, l.getIsbn());
+//				pStmt.setInt(3, l.getAuteur_id());
+//				pStmt.executeUpdate();
+//
+//				ResultSet rs = pStmt.getGeneratedKeys();
+//				rs.next();
+//				l.setId(rs.getInt(1));
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		public void delete(int id) {
 			Connection cnx = Connexion.getCnx();
@@ -110,6 +113,16 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+		@Override
+		public void update(Livre t) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void insert(Livre t) {
+			// TODO Auto-generated method stub
+			
 		}
 }
 

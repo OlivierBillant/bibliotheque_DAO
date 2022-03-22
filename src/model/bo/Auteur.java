@@ -29,7 +29,7 @@ public class Auteur {
 
 	@Override
 	public String toString() {
-		return "Auteur id " + id + ", nom " + name;
+		return name;
 	}
 
 	
