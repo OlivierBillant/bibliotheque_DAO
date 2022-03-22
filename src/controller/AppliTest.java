@@ -29,7 +29,7 @@ public class AppliTest {
 		catalogue.getCatalogue();
 		
 		System.out.println("\nModification d'un livre  : " );
-		System.out.println("\nLivres avant modification : ");
+		System.out.println("Livres avant modification : ");
 		System.out.println(livre2.toString());
 		System.out.println(livre3.toString());
 		livre2.setIsbn("321-654-987");
