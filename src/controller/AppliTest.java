@@ -12,7 +12,7 @@ public class AppliTest {
 		Livre livre3 = new Livre("Le retour du roi","123-456-789" ,"J.R.R. Tolkien");
 		Livre livre4 = new Livre("Le Silmarillon","666-666-666" ,"J.R.R. Tolkien");
 		
-		System.out.println("\nAjout au catalogue  : " );
+		System.out.println("\nTest connexion et ajout catalogue  : " );
 		catalogue.addLivre(livre1);
 		catalogue.addLivre(livre2);
 		catalogue.addLivre(livre3);

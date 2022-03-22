@@ -36,7 +36,6 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 		public List<Livre> selectAll() {
 			List<Livre> stock = new ArrayList<Livre>();
 			Connection cnx = Connexion.getCnx();
-			Livre livre = null;
 			String sql = "SELECT * from livre";
 			try {
 				Statement state = cnx.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
@@ -47,8 +46,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 					l.setTitre(rs.getString("titre"));
 					l.setIsbn(rs.getString("isbn"));
 					l.setAuteur(rs.getString("auteur"));
-					livre = l;
-					stock.add(livre);
+					stock.add(l);
 					}
 				}
 			catch (SQLException e) {
