@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.bo.Auteur;
 import model.bo.Livre;
 
 
@@ -25,7 +26,8 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 				l.setId(rs.getInt("id"));
 				l.setTitre(rs.getString("titre"));
 				l.setIsbn(rs.getString("isbn"));
-				l.setAuteur(rs.getString("auteur"));
+				l.setAuteur_id(rs.getInt("auteur_id"));
+				
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -36,7 +38,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 		public List<Livre> selectAll() {
 			List<Livre> stock = new ArrayList<Livre>();
 			Connection cnx = Connexion.getCnx();
-			String sql = "SELECT * from livre";
+			String sql = "SELECT * from livre_test AS l INNER JOIN auteurs AS a ON a.id = l.auteur_id";
 			try {
 				Statement state = cnx.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 				ResultSet rs = state.executeQuery(sql);
@@ -45,7 +47,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 					l.setId(rs.getInt("id"));
 					l.setTitre(rs.getString("titre"));
 					l.setIsbn(rs.getString("isbn"));
-					l.setAuteur(rs.getString("auteur"));
+					l.setAuteur_id(rs.getString("name"));
 					stock.add(l);
 					}
 				}
@@ -67,7 +69,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 				PreparedStatement pStmt = cnx.prepareStatement(sqlPrepared);
 				pStmt.setString(1, l.getTitre());
 				pStmt.setString(2, l.getIsbn());
-				pStmt.setString(3, l.getAuteur());
+				pStmt.setInt(3, l.getAuteur_id());
 				pStmt.setInt(4, l.getId());
 				
 				pStmt.executeUpdate();
@@ -85,7 +87,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 	
 				pStmt.setString(1, l.getTitre());
 				pStmt.setString(2, l.getIsbn());
-				pStmt.setString(3, l.getAuteur());
+				pStmt.setInt(3, l.getAuteur_id());
 				pStmt.executeUpdate();
 
 				ResultSet rs = pStmt.getGeneratedKeys();

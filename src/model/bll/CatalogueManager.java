@@ -2,7 +2,9 @@ package model.bll;
 
 import java.util.List;
 
+import model.bo.Auteur;
 import model.bo.Livre;
+import model.dal.AuteurDAO;
 import model.dal.LivreDAO;
 
 public class CatalogueManager {
@@ -35,5 +37,14 @@ public class CatalogueManager {
 	public void modifierLivre(Livre l) {
 		LivreDAO bibliotheque = new LivreDAO();
 		bibliotheque.update(l);
+		
+	}
+		public void getAuthorList() {
+			AuteurDAO authorlist = new AuteurDAO();
+			List<Auteur> liste = authorlist.selectAll();
+			for (Auteur auteur : liste) {
+				System.out.println(auteur);
+			}
+			System.out.println("");
 	}
 }	

@@ -4,15 +4,15 @@ public class Livre {
 	private Integer id;
 	private String titre;
 	private String isbn;
-	private String auteur;
+	private Auteur auteur_id;
 	
 	public Livre() {		
 	}
 	
-	public Livre(String titre, String isbn, String auteur) {
+	public Livre(String titre, String isbn, Auteur auteur) {
 		this.titre = titre;
 		this.isbn = isbn;
-		this.auteur = auteur;
+		this.auteur_id = auteur;
 	}
 
 	public Integer getId() {
@@ -39,17 +39,17 @@ public class Livre {
 		this.isbn = isbn;
 	}
 
-	public String getAuteur() {
-		return auteur;
+	public Auteur getAuteur_id() {
+		return auteur_id;
 	}
 
-	public void setAuteur(String auteur) {
-		this.auteur = auteur;
+	public void setAuteur_id(Auteur auteur) {
+		this.auteur_id = auteur;
 	}
 
 	@Override
 	public String toString() {
-		return "Livre id " + id + ", titre " + titre + ", isbn " + isbn + ", auteur " + auteur;
+		return "Livre id " + id + ", titre " + titre + ", isbn " + isbn + ", auteur " + auteur_id;
 	}
 	
 	
