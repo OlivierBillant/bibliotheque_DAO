@@ -47,7 +47,7 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 					l.setId(rs.getInt("id"));
 					l.setTitre(rs.getString("titre"));
 					l.setIsbn(rs.getString("isbn"));
-					l.setAuteur_id(rs.getString("name"));
+					l.setAuteur_id(rs.getClass());
 					stock.add(l);
 					}
 				}
