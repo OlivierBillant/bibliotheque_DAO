@@ -1,14 +1,17 @@
 package view;
 
-	import java.awt.event.ActionEvent;
+	import java.awt.BorderLayout;
+import java.awt.Event;
+import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
 
-	import javax.swing.ImageIcon;
 	import javax.swing.JButton;
 	import javax.swing.JFrame;
 	import javax.swing.JLabel;
 	import javax.swing.JPanel;
-	import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import controller.ControllerLivre;
 import model.bo.InfoLivre;
@@ -22,7 +25,7 @@ import model.bo.InfoLivre;
 
 		public Fenetre() {
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			setBounds(150,150,500,500);
+			setBounds(150,150,375,500);
 			setTitle("Bibliotheque-MVC");
 			
 			//Affichage des catégories
@@ -73,6 +76,7 @@ import model.bo.InfoLivre;
 			benjamin.setBounds(20, 80, 310, 20);
 			monPanel.add(benjamin);
 			
+			//Affichage des informations sans JTable (V1)
 			JLabel idLivre_1 = new JLabel();
 			idLivre_1.setBounds(20, 100, 80, 20);
 			monPanel.add(idLivre_1);
@@ -88,6 +92,7 @@ import model.bo.InfoLivre;
 			JLabel auteurLivre_1 = new JLabel();
 			auteurLivre_1.setBounds(250, 100, 80, 20);
 			monPanel.add(auteurLivre_1);
+			
 			setVisible(true);
 			
 			//Action du Bouton
@@ -100,19 +105,89 @@ import model.bo.InfoLivre;
 					String isbnLivre = saisieIsbnLivre.getText();
 					String auteurLivre = saisieAuteurLivre.getText();
 
-					InfoLivre info = ControllerLivre.traitement(titreLivre, isbnLivre, auteurLivre);
-					
+					InfoLivre info = ControllerLivre.ajouterLivre(titreLivre, isbnLivre, auteurLivre);
+					Fenetre resultat = new Fenetre(info);
 //					saisieIdLivre.setText("");
 					saisieTitreLivre.setText("");
 					saisieIsbnLivre.setText("");
 					saisieAuteurLivre.setText("");
 					
-					for (int i= 0; i < info.getL().size(); i++) {
-						idLivre_1.setText(Integer.toString(info.getL().get(i).getId()));
-						titreLivre_1.setText(info.getL().get(i).getTitre());
-						isbnLivre_1.setText(info.getL().get(i).getIsbn());
-						auteurLivre_1.setText(info.getL().get(i).getAuteur());
-					}
+//					for (int i= 0; i < info.getL().size(); i++) {
+//						idLivre_1.setText(Integer.toString(info.getL().get(i).getId()));
+//						titreLivre_1.setText(info.getL().get(i).getTitre());
+//						isbnLivre_1.setText(info.getL().get(i).getIsbn());
+//						auteurLivre_1.setText(info.getL().get(i).getAuteur());
+//					}
+				}
+			});
+		}
+		public Fenetre(InfoLivre info) {
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setBounds(500,150,375,500);
+			setTitle("Liste-MVC");
+			
+			//Affichage des catégories
+			JPanel monPanel = new JPanel();
+			setContentPane(monPanel);
+			setLayout(null);
+			
+			JButton benjaminModifier = new JButton("Modifier");
+			benjaminModifier.setBounds(20, 150, 150, 20);
+			monPanel.add(benjaminModifier);
+			benjaminModifier.setVisible(true);
+			
+			JButton benjaminSupprimer = new JButton("Supprimer");
+			benjaminSupprimer.setBounds(170, 150, 150, 20);
+			monPanel.add(benjaminSupprimer);
+			benjaminSupprimer.setVisible(true);
+			
+			//Alimentation du tableau JFrame
+			String[] colonnes = {"ID", "Titre", "ISBN", "Auteur"};
+			int nb = info.getL().size();
+			String [][] tableau = new String [nb] [colonnes.length];
+			
+			for (int i= 0; i < info.getL().size(); i++) {
+				tableau[i][0] = Integer.toString(info.getL().get(i).getId());
+				tableau[i][1] = info.getL().get(i).getTitre();
+				tableau[i][2] = info.getL().get(i).getIsbn();
+				tableau[i][3] = info.getL().get(i).getAuteur();
+			}
+			
+			JTable listeLivres = new JTable(tableau, colonnes);
+			listeLivres.setBounds(20, 120, 310, 100);
+			listeLivres.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			setLayout(new BorderLayout());
+	        add(listeLivres.getTableHeader(), BorderLayout.PAGE_START);
+	        add(listeLivres, BorderLayout.CENTER);
+			monPanel.add(listeLivres);
+
+	        setVisible(true);
+	        
+	        benjaminSupprimer.addActionListener(new ActionListener() {				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = listeLivres.getSelectedRow();
+					int id = Integer.parseInt(tableau[index][0]);
+					ControllerLivre.traitement(id);
+					Fenetre resultatMaj = new Fenetre(ControllerLivre.traitement());
+					setVisible(false);
+					dispose();
+				}
+			});
+	        
+	        benjaminModifier.addActionListener(new ActionListener() {				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int index = listeLivres.getSelectedRow();
+					int id = Integer.parseInt(tableau[index][0]);
+					String titreLivre = tableau[index][1];
+					String isbnLivre = tableau[index][2];
+					String auteurLivre = tableau[index][3];
+
+					InfoLivre info = ControllerLivre.modifierLivre(titreLivre, isbnLivre, auteurLivre);
+					Fenetre resultatMaj = new Fenetre(info);
+					setVisible(false);
+					dispose();
 				}
 			});
 		}

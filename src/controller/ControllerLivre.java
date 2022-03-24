@@ -23,11 +23,26 @@ public class ControllerLivre {
 		f1 = new Fenetre();
 	}
 	
-	public static InfoLivre traitement(String titreLivre, String isbnLivre, String auteurLivre) {
+	public static InfoLivre ajouterLivre(String titreLivre, String isbnLivre, String auteurLivre) {
 		Livre l = CatalogueManager.nouveauLivre(titreLivre, isbnLivre, auteurLivre);;
 		CatalogueManager.addLivre(l);
 		InfoLivre info = CatalogueManager.affichageCatalogue();
 		return info;
 	}
-
+	
+	public static InfoLivre modifierLivre(String titreLivre, String isbnLivre, String auteurLivre) {
+		Livre l = CatalogueManager.nouveauLivre(titreLivre, isbnLivre, auteurLivre);;
+		CatalogueManager.modifierLivre(l);
+		InfoLivre info = CatalogueManager.affichageCatalogue();
+		return info;
+	}
+	
+	public static InfoLivre traitement() {
+		InfoLivre info = CatalogueManager.affichageCatalogue();
+		return info;
+	}
+	
+	public static void traitement(int id) {
+		CatalogueManager.enleverLivre(id);
+	}
 }
