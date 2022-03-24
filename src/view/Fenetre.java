@@ -28,7 +28,7 @@ import model.bo.InfoLivre;
 			setBounds(150,150,375,500);
 			setTitle("Bibliotheque-MVC");
 			
-			//Affichage des catégories
+			//Affichage des catï¿½gories
 			JPanel monPanel = new JPanel();
 			setContentPane(monPanel);
 			setLayout(null);
@@ -72,7 +72,7 @@ import model.bo.InfoLivre;
 			monPanel.add(saisieAuteurLivre);
 			
 			//Affichage du bouton
-			JButton benjamin = new JButton("Ajoutez une référence");
+			JButton benjamin = new JButton("Ajoutez une reference");
 			benjamin.setBounds(20, 80, 310, 20);
 			monPanel.add(benjamin);
 			
@@ -126,7 +126,7 @@ import model.bo.InfoLivre;
 			setBounds(500,150,375,500);
 			setTitle("Liste-MVC");
 			
-			//Affichage des catégories
+			//Affichage des catï¿½gories
 			JPanel monPanel = new JPanel();
 			setContentPane(monPanel);
 			setLayout(null);
