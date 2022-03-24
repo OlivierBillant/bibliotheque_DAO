@@ -13,20 +13,20 @@ public class AppliTest {
 		Livre livre4 = new Livre("Le Silmarillon","666-666-666" ,"J.R.R. Tolkien");
 		
 		System.out.println("\nTest connexion et ajout catalogue  : " );
-		catalogue.addLivre(livre1);
-		catalogue.addLivre(livre2);
-		catalogue.addLivre(livre3);
-		catalogue.addLivre(livre4);
+		CatalogueManager.addLivre(livre1);
+		CatalogueManager.addLivre(livre2);
+		CatalogueManager.addLivre(livre3);
+		CatalogueManager.addLivre(livre4);
 		
 		System.out.println("\nAffichage du catalogue  : " );
-		catalogue.getCatalogue();
+		CatalogueManager.getCatalogue();
 		
 		System.out.println("\nAffichage d'un seul livre  : " );
-		catalogue.selectLivre(1);
+		CatalogueManager.selectLivre(1);
 		
 		System.out.println("\nSuppression d'un livre  : " );
-		catalogue.enleverLivre(4);
-		catalogue.getCatalogue();
+		CatalogueManager.enleverLivre(4);
+		CatalogueManager.getCatalogue();
 		
 		System.out.println("\nModification d'un livre  : " );
 		System.out.println("\nLivres avant modification : ");
@@ -35,10 +35,10 @@ public class AppliTest {
 		livre2.setIsbn("321-654-987");
 		livre3.setIsbn("147-258-369");
 		System.out.println("\nLivres après modification  : " );
-		catalogue.modifierLivre(livre2);
-		catalogue.modifierLivre(livre3);
-		catalogue.selectLivre(2);
-		catalogue.selectLivre(3);
+		CatalogueManager.modifierLivre(livre2);
+		CatalogueManager.modifierLivre(livre3);
+		CatalogueManager.selectLivre(2);
+		CatalogueManager.selectLivre(3);
 		}
 	}
 

@@ -2,12 +2,13 @@ package model.bll;
 
 import java.util.List;
 
+import model.bo.InfoLivre;
 import model.bo.Livre;
 import model.dal.LivreDAO;
 
 public class CatalogueManager {
 
-	public void getCatalogue() {
+	public static void getCatalogue() {
 		LivreDAO bibliotheque = new LivreDAO();
 		List<Livre> stock = bibliotheque.selectAll();
 		for (Livre livre : stock) {
@@ -16,24 +17,38 @@ public class CatalogueManager {
 		System.out.println("");
 	}
 	
-	public void addLivre(Livre l) {
+	public static void addLivre(Livre l) {
 		LivreDAO bibliotheque = new LivreDAO();
 		bibliotheque.insert(l);
 	}
 
-	public void selectLivre(int id) {
+	public static void selectLivre(int id) {
 		LivreDAO bibliotheque = new LivreDAO();
 		System.out.println(bibliotheque.selectBy(id));
 
 	}
 	
-	public void enleverLivre(int id) {
+	public static void enleverLivre(int id) {
 		LivreDAO bibliotheque = new LivreDAO();
 		bibliotheque.delete(id);
 	}
 	
-	public void modifierLivre(Livre l) {
+	public static void modifierLivre(Livre l) {
 		LivreDAO bibliotheque = new LivreDAO();
 		bibliotheque.update(l);
 	}
+	
+	public static Livre nouveauLivre(String titreLivre, String isbnLivre, String auteurLivre ) {
+		Livre l = new Livre(titreLivre, isbnLivre, auteurLivre);
+		return l;
+	}
+	
+	public static InfoLivre affichageCatalogue(){
+		LivreDAO bibliotheque = new LivreDAO();
+		List<Livre> stock = bibliotheque.selectAll();
+		InfoLivre info = new InfoLivre(stock);
+		return info;
+	}
+	
+	
 }	
