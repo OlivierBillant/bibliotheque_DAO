@@ -109,5 +109,17 @@ public class LivreDAO implements InterfaceDAO<Livre>{
 				e.printStackTrace();
 			}
 		}
+		
+		public void truncate() {
+			Connection cnx = Connexion.getCnx();
+			String sql = "TRUNCATE `data_livre`.`livre`";
+			try {
+				Statement stm = cnx.createStatement();
+				stm.executeUpdate(sql);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 }
 

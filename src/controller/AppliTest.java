@@ -1,7 +1,9 @@
 package controller;
 
 import model.bll.CatalogueManager;
+import model.bo.Dataset;
 import model.bo.Livre;
+import model.dal.LivreDAO;
 
 public class AppliTest {
 
@@ -39,6 +41,10 @@ public class AppliTest {
 		CatalogueManager.modifierLivre(livre3);
 		CatalogueManager.selectLivre(2);
 		CatalogueManager.selectLivre(3);
+		
+//		CatalogueManager.bruleAlexandrie();
+//		CatalogueManager.constructionAlexandrie();
+		
 		}
 	}
 

@@ -2,6 +2,7 @@ package model.bll;
 
 import java.util.List;
 
+import model.bo.Dataset;
 import model.bo.InfoLivre;
 import model.bo.Livre;
 import model.dal.LivreDAO;
@@ -43,11 +44,29 @@ public class CatalogueManager {
 		return l;
 	}
 	
+	public static Livre nouveauLivre(int id, String titreLivre, String isbnLivre, String auteurLivre ) {
+		Livre l = new Livre(id, titreLivre, isbnLivre, auteurLivre);
+		return l;
+	}
+	
 	public static InfoLivre affichageCatalogue(){
 		LivreDAO bibliotheque = new LivreDAO();
 		List<Livre> stock = bibliotheque.selectAll();
 		InfoLivre info = new InfoLivre(stock);
 		return info;
+	}
+	
+	public static void bruleAlexandrie() {
+		LivreDAO bibliotheque = new LivreDAO();
+		bibliotheque.truncate();
+	}
+	
+	public static void constructionAlexandrie() {
+		Dataset dataset = new Dataset();
+		LivreDAO bibliotheque = new LivreDAO();
+		for (Livre livre : dataset.getDataset()) {
+			bibliotheque.insert(livre);
+		}
 	}
 	
 	

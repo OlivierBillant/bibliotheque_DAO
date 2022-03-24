@@ -105,7 +105,7 @@ import model.bo.InfoLivre;
 					String isbnLivre = saisieIsbnLivre.getText();
 					String auteurLivre = saisieAuteurLivre.getText();
 
-					InfoLivre info = ControllerLivre.ajouterLivre(titreLivre, isbnLivre, auteurLivre);
+					InfoLivre info = ControllerLivre.traitement(titreLivre, isbnLivre, auteurLivre);
 					Fenetre resultat = new Fenetre(info);
 //					saisieIdLivre.setText("");
 					saisieTitreLivre.setText("");
@@ -140,6 +140,16 @@ import model.bo.InfoLivre;
 			benjaminSupprimer.setBounds(170, 150, 150, 20);
 			monPanel.add(benjaminSupprimer);
 			benjaminSupprimer.setVisible(true);
+			
+			JButton benjaminConstruire = new JButton("Construire Alexandrie");
+			benjaminConstruire.setBounds(20, 170, 150, 20);
+			monPanel.add(benjaminConstruire);
+			benjaminConstruire.setVisible(true);
+			
+			JButton benjaminBruler = new JButton("Bruler Alexandrie");
+			benjaminBruler.setBounds(170, 170, 150, 20);
+			monPanel.add(benjaminBruler);
+			benjaminBruler.setVisible(true);
 			
 			//Alimentation du tableau JFrame
 			String[] colonnes = {"ID", "Titre", "ISBN", "Auteur"};
@@ -179,13 +189,32 @@ import model.bo.InfoLivre;
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int index = listeLivres.getSelectedRow();
-					int id = Integer.parseInt(tableau[index][0]);
+					int idLivre = Integer.parseInt(tableau[index][0]);
 					String titreLivre = tableau[index][1];
 					String isbnLivre = tableau[index][2];
 					String auteurLivre = tableau[index][3];
 
-					InfoLivre info = ControllerLivre.modifierLivre(titreLivre, isbnLivre, auteurLivre);
+					InfoLivre info = ControllerLivre.traitement(idLivre, titreLivre, isbnLivre, auteurLivre);
 					Fenetre resultatMaj = new Fenetre(info);
+					setVisible(false);
+					dispose();
+				}
+			});
+	        benjaminConstruire.addActionListener(new ActionListener() {				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ControllerLivre.constructionAlexandrie();
+					Fenetre resultatMaj = new Fenetre(ControllerLivre.traitement());
+					setVisible(false);
+					dispose();
+				}
+			});
+	        
+	        benjaminBruler.addActionListener(new ActionListener() {				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ControllerLivre.brulerAlexandrie();
+					Fenetre resultatMaj = new Fenetre(ControllerLivre.traitement());
 					setVisible(false);
 					dispose();
 				}

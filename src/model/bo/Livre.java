@@ -15,6 +15,13 @@ public class Livre {
 		this.auteur = auteur;
 	}
 
+	public Livre(Integer id, String titre, String isbn, String auteur) {
+		this.id = id;
+		this.titre = titre;
+		this.isbn = isbn;
+		this.auteur = auteur;
+	}
+
 	public Integer getId() {
 		return id;
 	}

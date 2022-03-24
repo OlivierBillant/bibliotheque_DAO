@@ -23,15 +23,15 @@ public class ControllerLivre {
 		f1 = new Fenetre();
 	}
 	
-	public static InfoLivre ajouterLivre(String titreLivre, String isbnLivre, String auteurLivre) {
+	public static InfoLivre traitement(String titreLivre, String isbnLivre, String auteurLivre) {
 		Livre l = CatalogueManager.nouveauLivre(titreLivre, isbnLivre, auteurLivre);;
 		CatalogueManager.addLivre(l);
 		InfoLivre info = CatalogueManager.affichageCatalogue();
 		return info;
 	}
 	
-	public static InfoLivre modifierLivre(String titreLivre, String isbnLivre, String auteurLivre) {
-		Livre l = CatalogueManager.nouveauLivre(titreLivre, isbnLivre, auteurLivre);;
+	public static InfoLivre traitement(int id, String titreLivre, String isbnLivre, String auteurLivre) {
+		Livre l = CatalogueManager.nouveauLivre(id, titreLivre, isbnLivre, auteurLivre);;
 		CatalogueManager.modifierLivre(l);
 		InfoLivre info = CatalogueManager.affichageCatalogue();
 		return info;
@@ -44,5 +44,13 @@ public class ControllerLivre {
 	
 	public static void traitement(int id) {
 		CatalogueManager.enleverLivre(id);
+	}
+	
+	public static void brulerAlexandrie() {
+		CatalogueManager.bruleAlexandrie();
+	}
+	
+	public static void constructionAlexandrie() {
+		CatalogueManager.constructionAlexandrie();
 	}
 }
