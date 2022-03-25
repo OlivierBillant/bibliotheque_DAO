@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.bll.CatalogueManager;
@@ -49,20 +51,37 @@ public class AppliTest {
 //		CatalogueManager.bruleAlexandrie();
 //		CatalogueManager.constructionAlexandrie();
 		Scanner sc;
+		Dataset dataset = new Dataset();
+		Livre livre = null;
+		String[] temp;
+		List<Livre> listeLivre = new ArrayList<Livre>();
+		
 		try {
-			sc = new Scanner(new File("test.csv"));
-			sc.useDelimiter(",");   //sets the delimiter pattern  
+			sc = new Scanner(new File("import.csv"));
+//			sc.useDelimiter(",");   //sets the delimiter pattern  
 			while (sc.hasNext())  //returns a boolean value  
 			{  
-			System.out.print(sc.next());  //find and returns the next complete token from this scanner  
+				temp = sc.next().split(",");
+				
+				for (String string : temp) {
+					Livre livre_temp = new Livre();
+					livre_temp.setTitre(temp[0]);
+					livre_temp.setIsbn(temp[1]);
+					livre_temp.setAuteur(temp[2]);
+					livre = livre_temp;
+				}
+				listeLivre.add(livre);
 			}   
-			sc.close();  //closes the scanner  
-			
+			sc.close();  //closes the scanner
+
+			for (Livre l : listeLivre) {
+			System.out.println(l);
+		}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	}
+		}	
+	
+	
 	}
 

@@ -1,7 +1,10 @@
 package model.bo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Dataset {
 	private List<Livre> dataset = new ArrayList<Livre>();
@@ -18,6 +21,35 @@ public class Dataset {
 	}
 
 	public List<Livre> getDataset() {
+		Scanner sc;
+		Livre livre = null;
+		String[] temp;
+		
+		try {
+			sc = new Scanner(new File("import.csv"));
+//			sc.useDelimiter(",");   //sets the delimiter pattern  
+			while (sc.hasNext())  //returns a boolean value  
+			{  
+				temp = sc.next().split(",");
+				
+				for (String string : temp) {
+					Livre livre_temp = new Livre();
+					livre_temp.setTitre(temp[0]);
+					livre_temp.setIsbn(temp[1]);
+					livre_temp.setAuteur(temp[2]);
+					livre = livre_temp;
+				}
+				dataset.add(livre);
+			}   
+			sc.close();  //closes the scanner
+
+//			for (Livre l : dataset) {
+//			System.out.println(l);
+//		}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		return dataset;
 	}
 
